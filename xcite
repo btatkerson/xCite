@@ -1,0 +1,3 @@
+#!/usr/bin/bash 
+cd /home/benjamin/Dropbox/Programming/xCite/;
+./xCite.py;
