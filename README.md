@@ -3,8 +3,11 @@ Citation Management and Reference Formatting
 
 Developed by Benjamin Atkerson
 
+email: btatkerson@gmail.com
 
-Other Contributors:
+
+Contributors and Special Thanks to:
+
 Alex Ward,
 David Buckley, 
 Derek Chabre,
