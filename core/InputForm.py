@@ -23,7 +23,7 @@ class InputForm(QtWidgets.QWidget):
         numericValidator = QtGui.QIntValidator()
         pageValidator = QtGui.QRegExpValidator(QtCore.QRegExp('([0-9]{1,}[ ]{0,1}[,-]{1}[ ]{0,1})*'))
         cityValidator = QtGui.QRegExpValidator(QtCore.QRegExp(
-        "[A-Za-z]{1,}[.]{0,1}[ ]{0,1}([A-Za-z]{1,}([ ]{0,1}[-]){0,1}[ ]{0,1})*([A-Za-z]{1}[']{0,1}([A-Za-z]{1,}([ ]{0,1}[-]){0,1}[ ]{0,1})*){0,1}[,]{1}[ ]{0,1}[A-Za-z]{2}"))
+        "[A-Za-z]{1,}[.]{0,1}[ ]{0,1}([A-Za-z]{1,}([ ]{0,1}[-]){0,1}[ ]{0,1})*([A-Za-z]{1}[']{0,1}([A-Za-z]{1,}([ ]{0,1}[-]){0,1}[ ]{0,1})*){0,1}[.]{0,1}[,]{1}[ ]{0,1}[A-Za-z]{2}"))
 
         self.lineSeparator = QtWidgets.QFrame()
         self.lineSeparator.setFrameShape(QtWidgets.QFrame.Shape.HLine)

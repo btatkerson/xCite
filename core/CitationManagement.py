@@ -817,7 +817,7 @@ class Citation():
         return self.citationDict[PBLCA]
 
     def setPublication(self, publication):
-        publicationAcceptableChars = AcceptableNameChars + "."
+        publicationAcceptableChars = AcceptableNameChars + "@$%*&,."
         publication = "".join([i for i in str(publication) if i in publicationAcceptableChars])
         self.citationDict[PBLCA] = publication
         
@@ -826,7 +826,7 @@ class Citation():
         return self.citationDict[PBLSH]
 
     def setPublisher(self, publisher):
-        publisherAcceptableChars = AcceptableNameChars + "."
+        publisherAcceptableChars = AcceptableNameChars + "&,."
         publisher = "".join([i for i in str(publisher) if i in publisherAcceptableChars])
         self.citationDict[PBLSH] = publisher
 
