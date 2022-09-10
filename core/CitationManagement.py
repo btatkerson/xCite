@@ -409,7 +409,7 @@ class CitationManager():
         else:
             for i in citations:
                 listString.append(i)
-        return "\n".join(listString)
+        return "\n".join(listString).replace("  "," ").replace(",,", ",").replace("..",".")
 
 
     def getAPAFormattedListString(self, citationList=None, filtersEnabled=False, alphabetical=True):
@@ -432,7 +432,7 @@ class CitationManager():
         else:
             for i in citations:
                 listString.append(i)
-        return "\n".join(listString)
+        return "\n".join(listString).replace("  "," ").replace(",,", ",").replace("..",".")
 
 
 
@@ -460,7 +460,7 @@ class CitationManager():
             for i in citations:
                 countCites += 1
                 listString.append("[%d] %s"%(countCites,i))
-        return "\n".join(listString)
+        return "\n".join(listString).replace("  "," ").replace(",,", ",").replace("..",".")
 
 
 
@@ -1413,15 +1413,22 @@ class Citation():
 
             APA_ISSVOL = ""
 
-            if APA_VOLUME and APA_ISSUE:
-                APA_ISSVOL = "<i>, %s</i>(%s)"%(APA_VOLUME, APA_ISSUE) 
-            elif APA_ISSUE:
-                APA_ISSVOL = "<i>,</i> (%s)"%(APA_ISSUE)
-            elif APA_VOLUME:
-                APA_ISSVOL = "<i>, %s</i>"%(APA_VOLUME)
+            if not APA_PUBLICATION:
+                if APA_VOLUME and APA_ISSUE:
+                    APA_ISSVOL = "<i>, %s</i>(%s)"%(APA_VOLUME, APA_ISSUE) 
+                elif APA_ISSUE:
+                    APA_ISSVOL = "<i>,</i> (%s)"%(APA_ISSUE)
+                elif APA_VOLUME:
+                    APA_ISSVOL = "<i>, %s</i>"%(APA_VOLUME)
             else:
-                pass
-            print("APA VOL ISS: (%s, %s, %s)"%(APA_VOLUME,APA_ISSUE, APA_ISSVOL))
+                if APA_VOLUME and APA_ISSUE:
+                    APA_ISSVOL = "<i> %s</i>(%s)"%(APA_VOLUME, APA_ISSUE) 
+                elif APA_ISSUE:
+                    APA_ISSVOL = "<i></i> (%s)"%(APA_ISSUE)
+                elif APA_VOLUME:
+                    APA_ISSVOL = "<i> %s</i>"%(APA_VOLUME)
+
+            #print("APA VOL ISS: (%s, %s, %s)"%(APA_VOLUME,APA_ISSUE, APA_ISSVOL))
                 
 
             if APA_PUBLICATIONYEAR:
@@ -1432,11 +1439,13 @@ class Citation():
 
             if APA_PAGES:
                 if APA_ISSVOL:
-                    APA_ISSVOL += ","
-                else:
-                    APA_TITLE += ","
+                    APA_ISSVOL += ", "
+                APA_TITLE += ", "
 
                 APA_PAGES = " " + APA_PAGES + "."
+                if APA_PUBLICATION:
+                    APA_PUBLICATION = APA_PUBLICATION + ", "
+
 
             else:
                 if APA_ISSVOL:
@@ -1448,6 +1457,7 @@ class Citation():
             if APA_URL:
                 APA_URL = " " + self.__formatBold(APA_URL)
 
+            
 
 
             if APA_AUTHORS:
