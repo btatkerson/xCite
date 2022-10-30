@@ -817,7 +817,7 @@ class Citation():
         return self.citationDict[PBLCA]
 
     def setPublication(self, publication):
-        publicationAcceptableChars = AcceptableNameChars + "@$%*&,."
+        publicationAcceptableChars = AcceptableNameChars + "@$%*&,.0123456789"
         publication = "".join([i for i in str(publication) if i in publicationAcceptableChars])
         self.citationDict[PBLCA] = publication
         
@@ -826,7 +826,7 @@ class Citation():
         return self.citationDict[PBLSH]
 
     def setPublisher(self, publisher):
-        publisherAcceptableChars = AcceptableNameChars + "&,."
+        publisherAcceptableChars = AcceptableNameChars + "&,.0123456789"
         publisher = "".join([i for i in str(publisher) if i in publisherAcceptableChars])
         self.citationDict[PBLSH] = publisher
 
@@ -1431,7 +1431,9 @@ class Citation():
             #print("APA VOL ISS: (%s, %s, %s)"%(APA_VOLUME,APA_ISSUE, APA_ISSVOL))
                 
 
-            if APA_PUBLICATIONYEAR:
+            if APA_PUBLICATIONYEAR == "0000":
+                APA_PUBLICATIONYEAR = ""
+            else:
                 APA_PUBLICATIONYEAR = "(%s). "%str(APA_PUBLICATIONYEAR)
 
 
@@ -1708,8 +1710,12 @@ class Citation():
                 finalStr += IEEE_ISSUE + " "
 
             finalStr += IEEE_CITY_PUB
-
-            finalStr += ", " + IEEE_PUBDATE_YEAR + ". "
+            
+            if IEEE_PUBDATE_YEAR != "0000":
+                finalStr += ", " + IEEE_PUBDATE_YEAR + ". "
+            else:
+                finalStr += ". "
+                
             if IEEE_URL:
                 finalStr += IEEE_URL + " " + IEEE_ACCESS_DATE_STRING
 
@@ -1747,7 +1753,7 @@ class Citation():
  
                 finalStr += IEEE_PAGES
 
-            if IEEE_PUBDATE_YEAR:
+            if IEEE_PUBDATE_YEAR != "0000":
                 cleanStr = ""
                 if IEEE_PUBDATE_MONTH:
                     cleanStr+=IEEE_PUBDATE_MONTH
@@ -1756,8 +1762,6 @@ class Citation():
                     cleanStr+=", "
                 cleanStr+=IEEE_PUBDATE_YEAR
                 finalStr += cleanStr + ". "
-            else:
-                finalStr += IEEE_PUBDATE_YEAR + ". "
 
             if IEEE_URL:
                 finalStr += IEEE_URL + " " + IEEE_ACCESS_DATE_STRING
@@ -1795,7 +1799,7 @@ class Citation():
  
                 finalStr += IEEE_PAGES
 
-            if IEEE_PUBDATE_YEAR:
+            if IEEE_PUBDATE_YEAR != "0000":
                 cleanStr = ""
                 if IEEE_PUBDATE_MONTH:
                     cleanStr+=IEEE_PUBDATE_MONTH
